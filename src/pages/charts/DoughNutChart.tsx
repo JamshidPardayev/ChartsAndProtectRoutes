@@ -10,11 +10,11 @@ const DoughnutCharts = () => {
   const [recipes, setRecipes] = useState<IRecipes[]>([]);
   const [error, setError] = useState<null | string>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [pagination, setPagination] = useState(0);
   useEffect(() => {
     setLoading(true);
     api
-      .get("/recipes?limit=5")
+      .get(`/recipes?limit=5&skip=${pagination * 5}`)
       .then((res) => {
         const items = res.data.recipes || res.data;
         setRecipes(items);
@@ -24,8 +24,8 @@ const DoughnutCharts = () => {
         setError("Ma'lumotlarni olishda xatolik yuz berdi");
       })
       .finally(() => setLoading(false));
-  }, []);
-console.log(recipes);
+  }, [pagination]);
+  console.log(recipes);
 
   const titles = recipes.map((recipe) => recipe.name);
   const count = recipes.map((recipe) => recipe.reviewCount || 0);
@@ -55,12 +55,40 @@ console.log(recipes);
     ],
   };
 
-  if (loading) return <p className="text-center">Yuklanmoqda...</p>;
+  if (loading)
+    return (
+      <p className="text-center content-center">
+        Yuklanmoqda... <span className="loader"></span>
+      </p>
+    );
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
-    <div className="w-full max-w-[500px] mx-auto">
-      <Doughnut data={data} />
+    <div>
+      <div className="mx-auto max-h-[500px] max-w-[500px] mt-10">
+        <Doughnut data={data} className="mx-auto h-full w-full" />
+      </div>
+      <div className="flex justify-center gap-2 text-white font-medium my-5">
+        <button
+          disabled={pagination <= 0}
+          className={`w-[150px] h-[35px] rounded duration-300
+    ${
+      pagination <= 0
+        ? "bg-gray-400 cursor-not-allowed"
+        : "bg-blue-500 hover:bg-blue-700 cursor-pointer"
+    }
+  `}
+          onClick={() => setPagination(pagination - 1)}
+        >
+          Prev
+        </button>
+        <button
+          className="w-[150px] h-[35px] rounded bg-blue-500 hover:bg-blue-700 cursor-pointer duration-300"
+          onClick={() => setPagination(pagination + 1)}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };
