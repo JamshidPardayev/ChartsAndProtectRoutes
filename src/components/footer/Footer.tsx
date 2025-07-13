@@ -1,7 +1,7 @@
 import React from "react";
 const Footer = () => {
   return (
-    <div className="container flex gap-5 justify-between flex-wrap">
+    <div className="container flex gap-5 justify-between flex-wrap py-5">
       <div>
         <h2 className="text-xl font-medium mt-4">Home</h2>
         <p className="mt-3">Lorem, ipsum dolor.</p>

@@ -1,7 +1,15 @@
-import React from "react";
+import React from 'react'
+import LineCharts from '../charts/LineChart'
+import DoughnutCharts from '../charts/DoughNutChart'
 
 const Statistics = () => {
-  return <div>Statistics</div>;
-};
+  return (
+    <div className='container'>
+      <h2 className='text-center text-[30px] font-semibold mb-5'>Statistics</h2>
+      <LineCharts />
+      <DoughnutCharts />
+    </div>
+  )
+}
 
-export default React.memo(Statistics);
+export default React.memo(Statistics)
