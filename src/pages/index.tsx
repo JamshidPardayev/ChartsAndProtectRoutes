@@ -6,6 +6,7 @@ const Layout = lazy(() => import("./layout/Layout"));
 const Statistics = lazy(() => import("./statistics/Statistics"));
 const Home = lazy(() => import("./home/Home"));
 const Login = lazy(() => import("./login/Login"));
+const Wishlist = lazy(() => import("./wishlist/Wishlist"));
 
 const MainRouter = () => {
   const routes = useRoutes([
@@ -24,6 +25,10 @@ const MainRouter = () => {
             {
               path: "statistics",
               element: <Statistics />,
+            },
+            {
+              path: "wishlist",
+              element: <Wishlist />,
             },
             {
               path: "*",
