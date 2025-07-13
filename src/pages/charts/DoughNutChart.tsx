@@ -20,7 +20,7 @@ const DoughnutCharts = () => {
         setRecipes(items);
       })
       .catch((err) => {
-        // console.error("API xatolik:", err);
+        console.error("API xatolik:", err);
         setError("Ma'lumotlarni olishda xatolik yuz berdi");
       })
       .finally(() => setLoading(false));
