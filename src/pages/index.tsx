@@ -6,7 +6,6 @@ const Layout = lazy(() => import("./layout/Layout"));
 const Statistics = lazy(() => import("./statistics/Statistics"));
 const Home = lazy(() => import("./home/Home"));
 const Login = lazy(() => import("./login/Login"));
-const Register = lazy(() => import("./register/Register"));
 
 const MainRouter = () => {
   const routes = useRoutes([
@@ -27,9 +26,9 @@ const MainRouter = () => {
               element: <Statistics />,
             },
             {
-                path: "*",
-                element: <NotFound />
-            }
+              path: "*",
+              element: <NotFound />,
+            },
           ],
         },
       ],
@@ -38,13 +37,19 @@ const MainRouter = () => {
       path: "login",
       element: <Login />,
     },
-    {
-      path: "register",
-      element: <Register />,
-    },
   ]);
 
-  return <Suspense fallback={<div>Yuklanmoqda...</div>}>{routes}</Suspense>;
+  return (
+    <Suspense
+      fallback={
+        <div className="flex gap-2 justify-center text-center items-center">
+          Yuklanmoqda... <span className="loader"></span>
+        </div>
+      }
+    >
+      {routes}
+    </Suspense>
+  );
 };
 
 export default React.memo(MainRouter);
