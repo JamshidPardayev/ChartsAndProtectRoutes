@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { useRoutes } from "react-router-dom";
 import Auth from "../auth/Auth";
-
+import NotFound from "./notFound/NotFound";
 const Layout = lazy(() => import("./layout/Layout"));
-const About = lazy(() => import("./about/About"));
+const Statistics = lazy(() => import("./statistics/Statistics"));
 const Home = lazy(() => import("./home/Home"));
 const Login = lazy(() => import("./login/Login"));
 const Register = lazy(() => import("./register/Register"));
@@ -23,9 +23,13 @@ const MainRouter = () => {
               element: <Home />,
             },
             {
-              path: "about",
-              element: <About />,
+              path: "statistics",
+              element: <Statistics />,
             },
+            {
+                path: "*",
+                element: <NotFound />
+            }
           ],
         },
       ],
