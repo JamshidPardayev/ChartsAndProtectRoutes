@@ -29,9 +29,9 @@ export const useStore = create<Store>((set, get) => ({
       : [...wishlist, product];
 
     localStorage.setItem("wishlist", JSON.stringify(updated));
-    set({ wishlist: updated }); 
+    set({ wishlist: updated });
   },
-
+  
   isInWishlist: (id) => {
     return get().wishlist.some((item) => item.id === id);
   },
